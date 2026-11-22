@@ -151,7 +151,7 @@ assert_size!(LmuTelemetryData, 196_356);
 /// Never read as a whole — at 324 KB a full copy would take longer than the
 /// 10 ms between telemetry writes is worth risking. [`super::reader`] copies
 /// the header scalars and only the occupied vehicle slots.
-#[repr(C, packed(4))]
+#[repr(C, align(8))]
 #[derive(Clone, Copy)]
 pub struct LmuObjectOut {
     pub generic: LmuGeneric,
@@ -159,7 +159,9 @@ pub struct LmuObjectOut {
     pub scoring: LmuScoringData,
     pub telemetry: LmuTelemetryData,
 }
-assert_size!(LmuObjectOut, 324_820);
+// The SDK's size_t gives the outer object 8-byte alignment and four tail bytes.
+// Payload offsets match the packed records, but sizeof includes this tail.
+assert_size!(LmuObjectOut, 324_824);
 
 // ---------------------------------------------------------------------------
 // Byte offsets used by the reader
@@ -270,9 +272,9 @@ mod tests {
     fn slot_count_is_lmus_own() {
         assert_eq!(MAX_MAPPED_VEHICLES, 104);
         assert_eq!(
-            OFF_TELEM_INFO + std::mem::size_of::<rF2VehicleTelemetry>() * MAX_MAPPED_VEHICLES,
+            OFF_TELEM_INFO + std::mem::size_of::<rF2VehicleTelemetry>() * MAX_MAPPED_VEHICLES + 4,
             std::mem::size_of::<LmuObjectOut>(),
-            "telemInfo is the last block, so its end must be the end of the mapping",
+            "telemInfo is the last block, followed by four SDK alignment bytes",
         );
     }
 }

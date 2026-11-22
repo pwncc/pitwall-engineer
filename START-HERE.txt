@@ -1,0 +1,22 @@
+PITWALL ENGINEER 0.1.2 — LMU RACE OPERATIONS
+
+ENGINEER
+1. Extract this whole folder. Double-click lmu-engineer.exe.
+2. The dashboard opens at http://127.0.0.1:7437.
+3. Open Setup & event rules > Drivers.
+4. Enter your reachable public hostname/IP:7443, or private VPN address:7443.
+5. Export one shared sender package per car. All co-drivers of that car use the same EXE; each PC creates its own identity automatically.
+6. Send the shared package to that car's drivers. The pairing credential is private.
+7. Forward TCP 7443 to this PC, or connect your team over a private network. Keep HTTP 7437 local.
+8. Check event assumptions and service times before making strategy calls.
+9. Use the receiver tray menu to reopen the dashboard or stop it after the race.
+
+DRIVER
+Extract the paired package and double-click its lmu-agent.exe before driving. Enable Plugins in LMU gameplay settings. Keep the agent running across your stint. It reconnects and records during outages. Right-click its tray icon for status or Stop.
+
+IMPORTANT
+A stream alone cannot provide fuel, pedal, tyre or energy telemetry. The agent must run on each driving PC. Spectator data is labelled scoring-only.
+
+Read README-ENGINEER.md for connection troubleshooting, strategy assumptions, imports and recovery. ENGINEER-VALIDATION.md records the completed checks and deployment scope.
+
+The app uses local game telemetry. It does not sign in to Steam or RaceControl, fetch ratings/results history, change game controls, or send driver instructions automatically.

@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 //! The rF2 telemetry and scoring records, as Le Mans Ultimate embeds them.
 //!
 //! Originally transcribed from the rFactor 2 shared-memory plugin's `rF2State.h`
@@ -297,7 +298,7 @@ pub struct rF2VehicleScoring {
     pub mPitGroup: [u8; 24],               // pit group identifier
     pub mFlag: u8,                          // primary flag shown to this vehicle
     pub mUnderYellow: u8,                   // 1 if full-course yellow active for this car
-    pub mCountLapFlag: u8,                  // dynamic blue-flag override
+    pub mCountLapFlag: u8,                  // 0=uncounted, 1=lap only, 2=lap and time
     pub mInGarageStall: u8,                // 1 if within allowable garage area
     pub mUpgradePack: [u8; 16],            // upgrade pack code
     pub mPitLapDist: f32,                   // pit lane distance (m)  ← f32, not f64!

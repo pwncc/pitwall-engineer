@@ -54,3 +54,24 @@ AGENTS.md
 
 # Real LMU result XMLs used for testing — they carry real drivers' names.
 /*.xml
+
+# Browser verification artifacts
+/dashboard/test-results/
+/dashboard/playwright-report/
+
+# Receiver identity, pairing credentials and local race recordings
+agent.json
+receiver.der
+receiver-key.der
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.duckdb
+*.duckdb.wal
+*.batch
+*.partial
+*.pem
+*.pfx
+*.key
+.env
+.env.*

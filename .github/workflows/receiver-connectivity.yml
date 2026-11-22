@@ -1,0 +1,18 @@
+name: Check receiver connectivity
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify receiver TLS certificate from an external host
+        env:
+          RECEIVER_PROBE_HOST: ${{ secrets.RECEIVER_PROBE_HOST }}
+          RECEIVER_CERT_SHA256: ${{ secrets.RECEIVER_CERT_SHA256 }}
+        run: python3 scripts/check-receiver-port.py
